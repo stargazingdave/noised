@@ -1,0 +1,26 @@
+{
+  "name": "noised",
+  "version": "0.0.1",
+  "description": "A js library for generating modular rain and thunders sound.",
+  "license": "ISC",
+  "author": "David Portal",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --clean",
+    "dev": "tsup src/index.ts --dts --format esm,cjs --sourcemap --watch"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  }
+}
