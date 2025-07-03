@@ -95,6 +95,34 @@ export class RainGenerator<T extends BaseAudioContext = AudioContext> {
         this._generateImpulseResponse();
     }
 
+    public destroy() {
+        this.stop(); // Ensure everything is silenced and stopped
+
+        // Disconnect all nodes that are part of the audio graph
+        this.output.disconnect();
+        this.noiseGainNode.disconnect();
+        this.noiseFilter.disconnect();
+        this.dropGainNode.disconnect();
+        this.dryDropGainNode.disconnect();
+        this.reverbNode.disconnect();
+        this.dryGain.disconnect();
+        this.wetGain.disconnect();
+
+        // Disconnect each EQ band
+        this.eqBands.forEach((band) => band.disconnect());
+
+        // Clear all LFOs
+        this.lfoMap.forEach(({ osc, gain }) => {
+            osc.disconnect();
+            gain.disconnect();
+        });
+        this.lfoMap.clear();
+
+        // Null references (optional, helps GC and safety)
+        this.noiseNode = null;
+        this.dropInterval = null;
+    }
+
     private _connectNodes() {
         this.noiseGainNode.connect(this.noiseFilter);
         this.noiseFilter.connect(this.dryGain);

@@ -65,6 +65,24 @@ export class NoiseDController<T extends BaseAudioContext = AudioContext> {
         this._applyParams();
     }
 
+    public destroy() {
+        this.stop();
+
+        // Disconnect and null out all EQ bands
+        this.eqBands.forEach((band) => band.disconnect());
+        this.eqBands = [];
+
+        // Disconnect master gain
+        this.masterGain.disconnect();
+
+        // Destroy sub-generators
+        this.rain.destroy();
+        this.thunder.destroy();
+
+        // Null references for safety
+        this.thunderTimeout = null;
+    }
+
     public start() {
         if (this.running) return;
         this.running = true;

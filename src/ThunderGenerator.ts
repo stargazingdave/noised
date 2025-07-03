@@ -142,6 +142,27 @@ export class ThunderGenerator<T extends BaseAudioContext = AudioContext> {
         this.output.connect(this.limiter);
     }
 
+    public destroy() {
+        // Disconnect output and limiter
+        this.output.disconnect();
+        this.limiter.disconnect();
+
+        // Disconnect EQ bands
+        this.eqBands.forEach((band) => band.disconnect());
+
+        // Clear reverb buffer reference (optional, helps GC)
+        this.reverbBuffer = null;
+
+        // Optional: If you're calling `triggerThunder()` repeatedly via setInterval somewhere,
+        // make sure to clear that interval outside or track and cancel it here.
+
+        // No scheduled `OscillatorNode`/`BufferSourceNode` references stored in fields,
+        // so the dynamically created nodes (osc, rumbleOsc, noise, brown, etc.)
+        // should be cleaned up after `stop()` and GC — nothing more to disconnect here.
+
+        // Clear params if you want to reset
+        // this.params = { ..._defaultThunderParams }; // Optional
+    }
 
     setGeneratedReverb() {
         const duration = this.params.reverbDuration?.value
