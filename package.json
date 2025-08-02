@@ -1,6 +1,6 @@
 {
   "name": "noised",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "A js library for generating modular rain and thunders sound.",
   "license": "ISC",
   "author": "David Portal",
