@@ -1,5 +1,12 @@
 # 🌧️ Noised
 
+> [!WARNING]
+> **This version of Noised is deprecated.** Timing issues in the original implementation made audio playback unreliable.
+>
+> Use [the new version (`noised-web`)](https://github.com/stargazingdave/noised-web) instead. Its implementation fixes the timing issues and improves parameter control and live playback management.
+>
+> This repository remains available for reference.
+
 A lightweight TypeScript library for procedural **rain** and **thunder** sound generation using the Web Audio API.  
 Perfect for ambience apps, games, or chill projects.
 
@@ -52,4 +59,4 @@ npm run dev
 
 ## 🧙 Author
 The name is David Portal, hi 😊
-I'll soon add a website with more of my projects.
+You can find more of my projects at [davidportal.dev](https://davidportal.dev).
